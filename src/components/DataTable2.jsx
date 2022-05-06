@@ -1,12 +1,14 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,51 +30,47 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-function createColumn() {
-  return ["Calories", "Fat", "Protein"];
-}
-
-function createRow(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const columns = createColumn();
-
-const rows = [
-  createRow("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createRow("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createRow("Eclair", 262, 16.0, 24, 6.0),
-  createRow("Cupcake", 305, 3.7, 67, 4.3),
-  createRow("Gingerbread", 356, 16.0, 49, 3.9)
-];
-
-function DataTable2() {
+function DataTable2({ header, columns, rows }) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            {columns.map((column) => (
-              <StyledTableCell align="right">{column}</StyledTableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box sx={{ my: 3, mx: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          {header || "Header"}
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                {columns.map((column) => (
+                  <StyledTableCell align="right">{column}</StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.calories}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Box>
   );
 }
 
