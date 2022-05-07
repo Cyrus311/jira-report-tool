@@ -1,7 +1,8 @@
 // import DataTable from "../components/DataTable";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
-import DataTable from "../components/DataTable2";
+import DataTable from "../components/DataTable";
+import Toolbar from "../components/Toolbar";
 import { login } from "../services/jira/jiraSlice";
 
 function createColumn() {
@@ -11,6 +12,13 @@ function createColumn() {
 function createRow(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
+
+const exportPDF = () => {
+  console.log("Export PDF!");
+};
+const exportPDF2 = () => {
+  console.log("Export PDF2!");
+};
 
 function Dashboard() {
   const rows = [
@@ -23,13 +31,19 @@ function Dashboard() {
 
   return (
     <Box>
-      <DataTable header="Nutrition" rows={rows} columns={createColumn()} />
+      <Toolbar
+        buttons={[
+          { name: "Outlined", onclick: exportPDF },
+          { name: "Outlined3", onclick: exportPDF2 }
+        ]}
+      />
+      <DataTable header="Nutrition1" rows={rows} columns={createColumn()} />
       <Divider variant="middle" />
-      <DataTable header="Nutrition" rows={rows} columns={createColumn()} />
+      <DataTable header="Nutrition2" rows={rows} columns={createColumn()} />
       <Divider variant="middle" />
-      <DataTable header="Nutrition" rows={rows} columns={createColumn()} />
+      <DataTable header="Nutrition3" rows={rows} columns={createColumn()} />
       <Divider variant="middle" />
-      <DataTable header="Nutrition" rows={rows} columns={createColumn()} />
+      <DataTable header="Nutrition4" rows={rows} columns={createColumn()} />
     </Box>
   );
 }

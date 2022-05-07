@@ -1,53 +1,78 @@
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer
-} from "@chakra-ui/react";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
-function DataTable() {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14
+  }
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0
+  }
+}));
+
+function DataTable({ header, columns, rows }) {
   return (
-    <TableContainer>
-      <Table variant="striped" colorScheme="gray">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
-        </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>To convert</Th>
-            <Th>into</Th>
-            <Th isNumeric>multiply by</Th>
-          </Tr>
-        </Tfoot>
-      </Table>
-    </TableContainer>
+    <Box sx={{ my: 3, mx: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h5"
+          id="tableTitle"
+          component="div"
+        >
+          {header || "Header"}
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+                {columns.map((column) => (
+                  <StyledTableCell key={column} align="right">
+                    {column}
+                  </StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.calories}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
+                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Box>
   );
 }
 
