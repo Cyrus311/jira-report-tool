@@ -1,4 +1,4 @@
-import jiraService from "./jiraService";
+import jiraService from "./reportService";
 
 //! Login user
 export const login = async (user) => {

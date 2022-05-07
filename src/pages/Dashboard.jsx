@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import DataTable from "../components/DataTable";
 import Toolbar from "../components/Toolbar";
 import Button from "@mui/material/Button";
-import { login } from "../services/jira/jiraSlice";
+import { login } from "../services/report/reportSlice";
 
 function createColumn() {
   return ["Calories", "Fat", "Protein", "Sugar"];
