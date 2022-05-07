@@ -1,6 +1,6 @@
 import request from "../apiCentral";
 
-export const login = async (email, password) => {
+const getIssues = async (email, password) => {
   return await request(
     {
       url: `/users/login`,
@@ -14,8 +14,8 @@ export const login = async (email, password) => {
   );
 };
 
-const getCalendars = (filterData) => {
-  return request({
+const getCalendars = async (filterData) => {
+  return await request({
     url: "/calendars",
     method: "GET",
     params: filterData
@@ -23,7 +23,7 @@ const getCalendars = (filterData) => {
 };
 
 const jiraService = {
-  login,
+  getIssues,
   getCalendars
 };
 
