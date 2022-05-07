@@ -2,6 +2,7 @@
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import DataTable from "../components/DataTable2";
+import { login } from "../services/jira/jiraSlice";
 
 function createColumn() {
   return ["Calories", "Fat", "Protein", "Sugar"];
