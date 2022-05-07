@@ -1,8 +1,10 @@
-// import DataTable from "../components/DataTable";
+import { createRef } from "react";
+import Pdf from "react-to-pdf";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import DataTable from "../components/DataTable";
 import Toolbar from "../components/Toolbar";
+import Button from "@mui/material/Button";
 import { login } from "../services/jira/jiraSlice";
 
 function createColumn() {
@@ -12,6 +14,8 @@ function createColumn() {
 function createRow(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
+
+const ref = createRef();
 
 const exportPDF = () => {
   console.log("Export PDF!");
@@ -30,21 +34,42 @@ function Dashboard() {
   ];
 
   return (
-    <Box>
+    <>
       <Toolbar
         buttons={[
-          { name: "Outlined", onclick: exportPDF },
-          { name: "Outlined3", onclick: exportPDF2 }
+          <Pdf targetRef={ref} filename="code-example.pdf" scale={0.8}>
+            {({ toPdf }) => (
+              <Button
+                key={4}
+                variant="outlined"
+                onClick={toPdf}
+                color="primary"
+              >
+                Export Pdf
+              </Button>
+            )}
+          </Pdf>
         ]}
       />
-      <DataTable header="Nutrition1" rows={rows} columns={createColumn()} />
-      <Divider variant="middle" />
-      <DataTable header="Nutrition2" rows={rows} columns={createColumn()} />
-      <Divider variant="middle" />
-      <DataTable header="Nutrition3" rows={rows} columns={createColumn()} />
-      <Divider variant="middle" />
-      <DataTable header="Nutrition4" rows={rows} columns={createColumn()} />
-    </Box>
+      <Box ref={ref}>
+        <DataTable
+          header="Module Based Report"
+          rows={rows}
+          columns={createColumn()}
+        />
+        <DataTable
+          header="Team Based Report"
+          rows={rows}
+          columns={createColumn()}
+        />
+        <DataTable header="Work On Hand" rows={rows} columns={createColumn()} />
+        <DataTable
+          header="Person Based Report"
+          rows={rows}
+          columns={createColumn()}
+        />
+      </Box>
+    </>
   );
 }
 

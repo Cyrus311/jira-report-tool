@@ -14,6 +14,17 @@ const Toolbar = ({ buttons }) => {
   return (
     <ThemeProvider theme={outerTheme}>
       <Stack spacing={2} direction="row" justifyContent="flex-end">
+        {buttons.map((button) => button)}
+      </Stack>
+    </ThemeProvider>
+  );
+};
+
+export default Toolbar;
+
+{
+  /* <ThemeProvider theme={outerTheme}>
+      <Stack spacing={2} direction="row" justifyContent="flex-end">
         {buttons.map((button) => (
           <Button
             key={button.name}
@@ -25,8 +36,5 @@ const Toolbar = ({ buttons }) => {
           </Button>
         ))}
       </Stack>
-    </ThemeProvider>
-  );
-};
-
-export default Toolbar;
+    </ThemeProvider> */
+}
