@@ -46,26 +46,18 @@ function DataTable({ header, columns, rows }) {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>Dessert (100g serving)</StyledTableCell>
                 {columns.map((column) => (
-                  <StyledTableCell key={column} align="right">
-                    {column}
-                  </StyledTableCell>
+                  <StyledTableCell key={column}>{column}</StyledTableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {row.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.calories}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                  <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                  <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                  <StyledTableCell>{row.calories}</StyledTableCell>
+                  <StyledTableCell>{row.fat}</StyledTableCell>
+                  <StyledTableCell>{row.carbs}</StyledTableCell>
+                  <StyledTableCell>{row.protein}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>

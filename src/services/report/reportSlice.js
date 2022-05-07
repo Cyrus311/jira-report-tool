@@ -1,8 +1,11 @@
 import reportService from "./reportService";
+import ISSUES from "../../../dummy-data";
 
 //! Module based report
-export const moduleBased = async (user) => {
+export const moduleBased = async () => {
   try {
+    console.log("moduleBased");
+    return ISSUES;
     const response = await reportService.getIssues(user);
     //! Data manipulation
     return response;
