@@ -17,7 +17,7 @@ import request from "../apiCentral";
 //     console.log(error);
 //   });
 
-const getIssues = async (email, password) => {
+const createIssue = async (email, password) => {
   return await request(
     {
       url: `/users/login`,
@@ -31,6 +31,14 @@ const getIssues = async (email, password) => {
   );
 };
 
+const getIssues = async (filterData) => {
+  return await request({
+    url: "/calendars",
+    method: "GET",
+    params: filterData
+  });
+};
+
 const getCalendars = async (filterData) => {
   return await request({
     url: "/calendars",
@@ -40,6 +48,7 @@ const getCalendars = async (filterData) => {
 };
 
 const jiraService = {
+  createIssue,
   getIssues,
   getCalendars
 };
