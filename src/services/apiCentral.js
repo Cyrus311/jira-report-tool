@@ -4,8 +4,8 @@ const request = async function (options, isHeader = true) {
   let authHeader = null;
   if (isHeader) {
     const tokenData = import.meta.env.TOKEN_DATA;
-    const { token } = JSON.parse(tokenData);
-    authHeader = token;
+    // const { token } = JSON.parse(tokenData);
+    authHeader = tokenData;
   }
 
   const client = axios.create({
